@@ -1,7 +1,7 @@
 'use strict';
 
 let webpack = require('webpack');
-
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 let vendorModules = /(node_modules|bower_components)/;
 
 module.exports = {
@@ -41,11 +41,19 @@ module.exports = {
   /*externals: ['bindings'],*/
   //
   plugins: [
+    /*If need compress*/
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: false,
+    //   comments: true,
+    // }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(['./www/js/*.hot-update.js', './www/js/*.hot-update.json'], {
+      exclude: ['index.js', 'libs']
+    })
   ],
 };
