@@ -44,7 +44,9 @@ module.exports = {
     /*If need compress*/
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: false,
-    //   comments: true,
+      // comments: true,
+      // mangle: false,
+      // beautify: true,
     // }),
     new webpack.DefinePlugin({
       'process.env': {
